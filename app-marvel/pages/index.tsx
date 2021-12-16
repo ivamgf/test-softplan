@@ -1,10 +1,30 @@
-import type { NextPage } from 'next'
+import type { NextPage, NextApiRequest, NextApiResponse } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import * as CharactersApi from './api/charactersApi'
+import getCharacters from './api/CharactersApi'
 
 const Home: NextPage = () => {
+  
+  const [dataCharacters, setState] = useState([] as any[])
+   
+  async function promises() {
+    
+    const { data } = await getCharacters()
+      .then(response => response.json());
+          const dataCharacters = data.results;
+      setState(dataCharacters);
+
+    return dataCharacters
+  }
+
+  useEffect(() => {
+    promises()
+  }, [])
+   
+  console.log("test:", dataCharacters)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,38 +39,29 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Great Heroes of Marvel!
+          Great Characters of Marvel!
         </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <ul>
+          {dataCharacters.map((list) => 
+            
+            <div className={styles.grid} key={list.id}>
+              <a href="https://nextjs.org/docs" className={styles.card}>
+                <h2 className={styles.Cardtitle}>{list.name}</h2>
+                
+                <img 
+                  className={styles.image}
+                  src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
+                  alt={list.name}
+                />
+                <p className={styles.description}>{list.description}</p>
+              </a>          
+            </div>
+          
+          )}
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        </ul>                       
+        
       </main>
 
       <footer className={styles.footer}>
