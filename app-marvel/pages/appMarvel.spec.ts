@@ -6,7 +6,7 @@ import Home from './index';
 
 describe('AppMarvel', () => {
     it('should return title', () => {
-        render(<Home />);
+        //render(<Home />);
         const title = screen.getByText('Marvel App');
         expect(title).toBeInTheDocument();
     });
