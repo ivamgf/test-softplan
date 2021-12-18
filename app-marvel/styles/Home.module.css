@@ -82,11 +82,11 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 300px;
+  max-width: 500px;
   max-height: 800px;
-  display: block;
-  float: left;
+  display: inline-block;
   position: relative;
+  margin-left: -20px;
 }
 
 .card:hover,
@@ -144,6 +144,28 @@
   margin-right: auto;
   margin-top: 1em;
   cursor: pointer;
+}
+
+.inputText {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.inputSearch {
+  max-width: 100%;
+  padding: 12px 12px;
+  margin: 8px 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 600px) {

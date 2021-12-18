@@ -5,8 +5,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
-export default function Characters(): JSX.Element {
-
+export default function editCharacter() {
     const [dataCharacter, setState] = useState([] as any[])
     const [dataSeries, setSeries] = useState([] as any[])
 
@@ -63,46 +62,46 @@ export default function Characters(): JSX.Element {
 
             <main className={styles.main}>
                 <ul>
-                    <h1 className={styles.title}>Marvel Character</h1>
+                    <h1 className={styles.title}>To Edit</h1>
                     {dataCharacter.map((list) => 
                         
                         <div className={styles.grid} key={list.id}>
                             <div className={styles.card}>
                                 <h2 className={styles.Cardtitle}>{list.name}</h2>
-                                
                                 <img 
                                 className={styles.image}
                                 src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
                                 alt={list.name}
-                                />
-                                                
-                                <Link href={`/editCharacter/${list.id}`}><button className={styles.button}>To Edit</button></Link>                                                              
+                                /> 
                                 
-                                <p className={styles.description}>{list.description}</p>
-                               
-                            </div>          
-                        </div>                    
-                    )}
+                                <form>
+                                    <label>Name</label>
+                                    <input 
+                                        className={styles.inputText} 
+                                        type={'text'} 
+                                        name={'nameCharacter'}
+                                        defaultValue={list.name}
+                                        placeholder='Type it character Name...'
+                                    />
 
-                    <h2 className={styles.title}>Series</h2>
-
-                    {dataSeries.map((listSeries) => 
-                            <div className={styles.grid} key={listSeries.id}>
-                            <div className={styles.card}>
-                                <h2 className={styles.Cardtitle}>{listSeries.title}</h2>
-                                
-                                <img 
-                                className={styles.image}
-                                src={`${listSeries.thumbnail.path}/portrait_xlarge.${listSeries.thumbnail.extension}`} 
-                                alt={listSeries.title}
-                                />
-                                                              
+                                    <label>Decription</label>
+                                    <textarea 
+                                        className={styles.inputText} 
+                                        name={'descriptionCharacter'}
+                                        rows={8}
+                                        defaultValue={list.description}
+                                        placeholder='Type it character description...'
+                                    />
+                                </form>                                            
+                                                           
+                                <Link href={`/`}><button className={styles.button}>Submit</button></Link>
                             </div>          
                         </div>
-                    
+                        
                     )}
+                    
                 </ul> 
-                <Link href={`/`}><button className={styles.button}>Voltar</button></Link>
+                <Link href={`/`}><button className={styles.button}>Voltar</button></Link> 
             </main>
 
             <footer className={styles.footer}>

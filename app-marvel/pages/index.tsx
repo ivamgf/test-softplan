@@ -9,6 +9,7 @@ import getCharacters from './api/CharactersApi'
 function Home() {
   
   const [dataCharacters, setState] = useState([] as any[])
+  const [dataSearch, setSearch] = useState('')
    
   async function promises() {
     
@@ -23,8 +24,11 @@ function Home() {
   useEffect(() => {
     promises()
   }, [])
-   
+
+  //const filterDataCharacters = dataCharacter.filter((list) => list.startsWith(dataSearch))
+    
   console.log("test:", dataCharacters)
+  console.log(dataSearch)
 
   return (
  
@@ -43,9 +47,18 @@ function Home() {
 
         <p className={styles.description}>
           Great Characters of Marvel!
-        </p>
+          <br /><br />          
+          <input
+            type={'text'}
+            className={styles.inputSearch}
+            value={dataSearch}
+            onChange={((e) => setSearch(e.target.value))}
+            placeholder={'Search ...'}
+          />
+        </p>        
 
         <ul>
+        
           {dataCharacters.map((list) => 
             
             <div className={styles.grid} key={list.id}>
