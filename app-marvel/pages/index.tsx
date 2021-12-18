@@ -1,11 +1,12 @@
 import type { NextPage, NextApiRequest, NextApiResponse } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import getCharacters from './api/CharactersApi'
 
-const Home: NextPage = () => {
+function Home() {
   
   const [dataCharacters, setState] = useState([] as any[])
    
@@ -26,6 +27,8 @@ const Home: NextPage = () => {
   console.log("test:", dataCharacters)
 
   return (
+ 
+
     <div className={styles.container}>
       <Head>
         <title>Marvel App</title>
@@ -46,7 +49,7 @@ const Home: NextPage = () => {
           {dataCharacters.map((list) => 
             
             <div className={styles.grid} key={list.id}>
-              <a href="https://nextjs.org/docs" className={styles.card}>
+              <div className={styles.card}>
                 <h2 className={styles.Cardtitle}>{list.name}</h2>
                 
                 <img 
@@ -54,8 +57,10 @@ const Home: NextPage = () => {
                   src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
                   alt={list.name}
                 />
-                <p className={styles.description}>{list.description}</p>
-              </a>          
+                                
+                <Link href={`/characters/${list.id}`}><button className={styles.button}>Detalhes</button></Link>                                                              
+                
+              </div>          
             </div>
           
           )}
@@ -77,6 +82,7 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
+   
   )
 }
 

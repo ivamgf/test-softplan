@@ -85,6 +85,7 @@
   width: 300px;
   max-height: 800px;
   display: block;
+  float: left;
   position: relative;
 }
 
@@ -126,6 +127,23 @@
 .description {
   text-align: center;
   padding-top: 15px;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-radius: 25px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
