@@ -14,9 +14,9 @@ function Titles() {
         </Title> 
 
         <SubTitle>
-          <p>
+          <span>
             Great Marvel Characters!
-          </p>
+          </span>
         </SubTitle> 
           
                
@@ -33,7 +33,6 @@ const Title = styled.div`
   font-size: 2rem; 
   background-color: #4CAF50; /* Green */
   color: #FFF;
-  border-radius: 5%;
 }
 `
 

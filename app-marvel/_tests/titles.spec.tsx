@@ -9,4 +9,10 @@ describe('AppMarvel', () => {
         const title = screen.getByText('Welcome to Marvel Comics!');
         expect(title).toBeInTheDocument();
     });
+
+    it('should return subTitle', () => {
+        render(<Titles />);
+        const Subtitle = screen.getByText('Great Marvel Characters!');
+        expect(Subtitle).toBeInTheDocument();
+    });
   });
