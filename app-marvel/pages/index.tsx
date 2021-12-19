@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Titles from '../components/Titles'
 import styles from '../styles/Home.module.css'
 import getCharacters from './api/CharactersApi'
 
@@ -47,14 +48,8 @@ function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to Marvel Comics!
-        </h1>
-
-        <p className={styles.description}>
-          Great Characters of Marvel!
-          
-        </p> 
+        
+        <Titles />
 
         <div className={styles.searchGroup}>
             <input

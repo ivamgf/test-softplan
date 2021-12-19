@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
-export default function Characters(): JSX.Element {
+export default function Characters() {
 
     const [dataCharacter, setState] = useState([] as any[])
     const [dataSeries, setSeries] = useState([] as any[])

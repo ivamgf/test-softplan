@@ -1,13 +1,12 @@
-// Testing Render Component
 import React from 'react';
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom'
-import Home from './index';
+import Titles from '../components/Titles'
 
 describe('AppMarvel', () => {
     it('should return title', () => {
-        //render(<Home />);
-        const title = screen.getByText('Marvel App');
+        render(<Titles />);
+        const title = screen.getByText('Welcome to Marvel Comics!');
         expect(title).toBeInTheDocument();
     });
   });
