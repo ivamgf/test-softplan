@@ -4,10 +4,12 @@ import Link from 'next/link'
 import Head from '../../components/Head'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
+import { useCookies } from 'react-cookie';
 
-export default function editCharacter() {
+function editCharacter() {
     const [dataCharacter, setState] = useState([] as any[])
     const [dataSeries, setSeries] = useState([] as any[])
+    const [cookies, setCookie] = useCookies([] as any[]);
 
     const router = useRouter()
     const slug = router.query.slug
@@ -49,62 +51,78 @@ export default function editCharacter() {
         promisesSeries()
     }, [])
    
+    function handleSubmit(newName: any) {
+        setCookie('name', newName)
+    }
+
     console.log("Data:", dataCharacter)
     console.log("Series:", dataSeries)
 
     return (
-        <div className={styles.container}>
+        
+            <div className={styles.container}>
 
-            <Head />     
+                <Head />     
 
-            <main className={styles.main}>
-                <ul>
-                    <h1 className={styles.title}>To Edit</h1>
-                    {dataCharacter.map((list) => 
+                <main className={styles.main}>
+                    <ul>
+                        <h1 className={styles.title}>To Edit</h1>
+                        {dataCharacter.map((list) => 
+                            
+                            <div className={styles.grid} key={list.id}>
+                                <div className={styles.card}>
+                                    <h2 className={styles.Cardtitle}>{list.name}</h2>
+                                    <img 
+                                    className={styles.image}
+                                    src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
+                                    alt={list.name}
+                                    /> 
+                                    
+                                    <form name={cookies.name} onSubmit={handleSubmit}>
+                                        <label>Name</label>
+                                        <input 
+                                            className={styles.inputText} 
+                                            type={'text'} 
+                                            name={'nameCharacter'}
+                                            defaultValue={list.name}
+                                            placeholder='Type it character Name...'
+                                        />
+
+                                        <label>Decription</label>
+                                        <textarea 
+                                            className={styles.inputText} 
+                                            name={'descriptionCharacter'}
+                                            rows={8}
+                                            defaultValue={list.description}
+                                            placeholder='Type it character description...'
+                                        />
+                                                                               
+                                                            
+                                    <Link href={`/`}>
+                                        <button 
+                                            className={styles.buttonSubmit}
+                                            type='submit'
+                                        >
+                                            Submit
+                                        </button>
+                                    </Link>
+                                    </form> 
+                                </div>  
+                                <Link href={`/characters/${list.id}`}><button className={styles.button}>Voltar</button></Link>        
+                            </div>
+                            
+                        )}
                         
-                        <div className={styles.grid} key={list.id}>
-                            <div className={styles.card}>
-                                <h2 className={styles.Cardtitle}>{list.name}</h2>
-                                <img 
-                                className={styles.image}
-                                src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
-                                alt={list.name}
-                                /> 
-                                
-                                <form>
-                                    <label>Name</label>
-                                    <input 
-                                        className={styles.inputText} 
-                                        type={'text'} 
-                                        name={'nameCharacter'}
-                                        defaultValue={list.name}
-                                        placeholder='Type it character Name...'
-                                    />
-
-                                    <label>Decription</label>
-                                    <textarea 
-                                        className={styles.inputText} 
-                                        name={'descriptionCharacter'}
-                                        rows={8}
-                                        defaultValue={list.description}
-                                        placeholder='Type it character description...'
-                                    />
-                                </form>                                            
-                                                           
-                                <Link href={`/`}><button className={styles.buttonSubmit}>Submit</button></Link>
-                            </div>  
-                            <Link href={`/characters/${list.id}`}><button className={styles.button}>Voltar</button></Link>        
-                        </div>
-                         
-                    )}
+                    </ul> 
                     
-                </ul> 
-                
-            </main>
+                </main>
 
-            <footer className={styles.footer}>
-                <Footer />
-            </footer>
-        </div>
+                <footer className={styles.footer}>
+                    <Footer />
+                </footer>
+                </div>
+                    
     )
 }
+
+export default editCharacter;

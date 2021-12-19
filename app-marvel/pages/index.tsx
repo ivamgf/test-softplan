@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Titles from '../components/Titles'
@@ -37,10 +37,10 @@ function Home() {
   console.log(dataSearch)
   console.log("search:", filterDataCharacters)
 
-  return (
- 
+  return ( 
 
-    <div className={styles.container}>
+    
+      <div className={styles.container}>
       
       <Head />
 
@@ -87,7 +87,7 @@ function Home() {
         <Footer />
       </footer>      
       
-    </div>
+    </div>    
    
   )
 }
