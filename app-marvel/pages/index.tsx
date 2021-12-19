@@ -11,7 +11,7 @@ function Home() {
   const [dataCharacters, setState] = useState([] as any[])
   const [dataSearch, setSearch] = useState('')
    
-  async function promises() {
+  async function promises(): Promise<any> {
     
     const { data } = await getCharacters()
       .then(response => response.json());
@@ -25,10 +25,16 @@ function Home() {
     promises()
   }, [])
 
-  //const filterDataCharacters = dataCharacter.filter((list) => list.startsWith(dataSearch))
+  const filterDataCharacters = dataCharacters
+    .filter((list) => list.name.startsWith(dataSearch))
+
+  function clearSearch() {
+    setSearch('')
+  }
     
   console.log("test:", dataCharacters)
   console.log(dataSearch)
+  console.log("search:", filterDataCharacters)
 
   return (
  
@@ -47,19 +53,23 @@ function Home() {
 
         <p className={styles.description}>
           Great Characters of Marvel!
-          <br /><br />          
-          <input
-            type={'text'}
-            className={styles.inputSearch}
-            value={dataSearch}
-            onChange={((e) => setSearch(e.target.value))}
-            placeholder={'Search ...'}
-          />
-        </p>        
+          
+        </p> 
+
+        <div className={styles.searchGroup}>
+            <input
+              type={'text'}
+              className={styles.inputSearch}
+              value={dataSearch}
+              onChange={((e) => setSearch(e.target.value))}
+              placeholder={'Search ...'}
+            />
+            <button className={styles.buttonSearch} onClick={clearSearch}>Clear</button> 
+          </div>        
 
         <ul>
         
-          {dataCharacters.map((list) => 
+          {filterDataCharacters.map((list) => 
             
             <div className={styles.grid} key={list.id}>
               <div className={styles.card}>
