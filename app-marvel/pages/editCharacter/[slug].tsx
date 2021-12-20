@@ -4,8 +4,9 @@ import Link from 'next/link'
 import Head from '../../components/Head'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
+import { connect } from 'react-redux'
 
-function editCharacter() {
+function editCharacter(props: { name: any, description: any }) {
     
     const [dataCharacter, setState] = useState([] as any[])
     const [dataSeries, setSeries] = useState([] as any[])
@@ -54,6 +55,7 @@ function editCharacter() {
    
     function handleChangeName(event: any) {
         setName(event.target.value);
+        props.name = name
     }
 
     function handleChangeDesc(event: any) {
@@ -63,12 +65,8 @@ function editCharacter() {
     function handleSubmit(event: any) {
         event.preventDefault();        
         console.log('name:', name);
-        console.log('description:', description);
     }
-
-    console.log("Data:", dataCharacter)
-    console.log("Series:", dataSeries)
-           
+              
     return (
         
             <div className={styles.container}>
@@ -95,7 +93,7 @@ function editCharacter() {
                                             className={styles.inputText} 
                                             type={'text'} 
                                             name={'nameCharacter'}
-                                            defaultValue={list.name}
+                                            defaultValue={list.name}                                            
                                             placeholder='Type it character Name...'
                                             onChange={handleChangeName}
                                         />
@@ -136,4 +134,11 @@ function editCharacter() {
     )
 }
 
-export default editCharacter;
+function mapStateToProps(state: any) {
+    return {
+        name: state.name,
+        description: state.description
+    }
+}
+
+export default connect(mapStateToProps) (editCharacter);

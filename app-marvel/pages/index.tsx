@@ -33,11 +33,7 @@ function Home() {
   function clearSearch() {
     setSearch('')
   }
-    
-  console.log("test:", dataCharacters)
-  console.log(dataSearch)
-  console.log("search:", filterDataCharacters)
-
+  
   return ( 
 
       <div className={styles.container}>

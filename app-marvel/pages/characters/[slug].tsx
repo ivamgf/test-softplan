@@ -50,9 +50,6 @@ export default function Characters() {
         promisesSeries()
     }, [])
    
-    console.log("Data:", dataCharacter)
-    console.log("Series:", dataSeries)
-
     return (
         <div className={styles.container}>
             
