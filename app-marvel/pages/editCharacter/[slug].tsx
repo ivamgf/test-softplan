@@ -116,10 +116,10 @@ function editCharacter() {
                                             type={'submit'}
                                         >
                                             Submit
-                                        </button>
+                                        </button><Link href={`/characters/${list.id}`}><button className={styles.buttonSubmit}>Voltar</button></Link>
                                     </form> 
                                 </div>  
-                                <Link href={`/characters/${list.id}`}><button className={styles.button}>Voltar</button></Link>        
+                                        
                             </div>
                             
                         )}

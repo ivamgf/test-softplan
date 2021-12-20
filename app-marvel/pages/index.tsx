@@ -6,11 +6,7 @@ import Head from '../components/Head'
 import Footer from '../components/Footer'
 import styles from '../styles/Home.module.css'
 import getCharacters from './api/CharactersApi'
-
-import { Provider } from 'react-redux'
-import configStore from '../data/store/storeConfig'
-
-const store = configStore();
+import Loader from '../components/Loader'
 
 function Home() {
   
@@ -44,7 +40,6 @@ function Home() {
 
   return ( 
 
-    <Provider store={store}>
       <div className={styles.container}>
       
         <Head />
@@ -52,7 +47,7 @@ function Home() {
         <main className={styles.main}>
           
           <Titles />
-
+          
           <div className={styles.searchGroup}>
               <input
                 type={'text'}
@@ -66,10 +61,10 @@ function Home() {
 
           <ul>
           
-            {filterDataCharacters.map((list) => 
+            {filterDataCharacters? filterDataCharacters.map((list) => 
               
-              <div className={styles.grid} key={list.id}>
-                <div className={styles.card}>
+              <div className={styles.gridHome} key={list.id}>
+                <div className={styles.cardHome}>
                   <h2 className={styles.Cardtitle}>{list.name}</h2>
                   
                   <img 
@@ -83,7 +78,7 @@ function Home() {
                 </div>          
               </div>
             
-            )}
+            ): <Loader />}
 
           </ul>                       
           
@@ -92,8 +87,7 @@ function Home() {
           <Footer />
         </footer>      
         
-      </div>
-    </Provider>          
+      </div>        
    
   )
 }
