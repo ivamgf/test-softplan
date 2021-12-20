@@ -7,6 +7,11 @@ import Footer from '../components/Footer'
 import styles from '../styles/Home.module.css'
 import getCharacters from './api/CharactersApi'
 
+import { Provider } from 'react-redux'
+import configStore from '../data/store/storeConfig'
+
+const store = configStore();
+
 function Home() {
   
   const [dataCharacters, setState] = useState([] as any[])
@@ -39,55 +44,56 @@ function Home() {
 
   return ( 
 
-    
+    <Provider store={store}>
       <div className={styles.container}>
       
-      <Head />
+        <Head />
 
-      <main className={styles.main}>
-        
-        <Titles />
-
-        <div className={styles.searchGroup}>
-            <input
-              type={'text'}
-              className={styles.inputSearch}
-              value={dataSearch}
-              onChange={((e) => setSearch(e.target.value))}
-              placeholder={'Search ...'}
-            />
-            <button className={styles.buttonSearch} onClick={clearSearch}>Clear</button> 
-          </div>        
-
-        <ul>
-        
-          {filterDataCharacters.map((list) => 
-            
-            <div className={styles.grid} key={list.id}>
-              <div className={styles.card}>
-                <h2 className={styles.Cardtitle}>{list.name}</h2>
-                
-                <img 
-                  className={styles.image}
-                  src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
-                  alt={list.name}
-                />
-                                
-                <Link href={`/characters/${list.id}`}><button className={styles.button}>Detalhes</button></Link>                                                              
-                
-              </div>          
-            </div>
+        <main className={styles.main}>
           
-          )}
+          <Titles />
 
-        </ul>                       
+          <div className={styles.searchGroup}>
+              <input
+                type={'text'}
+                className={styles.inputSearch}
+                value={dataSearch}
+                onChange={((e) => setSearch(e.target.value))}
+                placeholder={'Search ...'}
+              />
+              <button className={styles.buttonSearch} onClick={clearSearch}>Clear</button> 
+            </div>        
+
+          <ul>
+          
+            {filterDataCharacters.map((list) => 
+              
+              <div className={styles.grid} key={list.id}>
+                <div className={styles.card}>
+                  <h2 className={styles.Cardtitle}>{list.name}</h2>
+                  
+                  <img 
+                    className={styles.image}
+                    src={`${list.thumbnail.path}/portrait_xlarge.${list.thumbnail.extension}`} 
+                    alt={list.name}
+                  />
+                                  
+                  <Link href={`/characters/${list.id}`}><button className={styles.button}>Detalhes</button></Link>                                                              
+                  
+                </div>          
+              </div>
+            
+            )}
+
+          </ul>                       
+          
+        </main>
+        <footer className={styles.footer}>
+          <Footer />
+        </footer>      
         
-      </main>
-      <footer className={styles.footer}>
-        <Footer />
-      </footer>      
-      
-    </div>    
+      </div>
+    </Provider>          
    
   )
 }
