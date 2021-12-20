@@ -4,13 +4,14 @@ import Link from 'next/link'
 import Head from '../../components/Head'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
-import { useCookies } from 'react-cookie';
 
 function editCharacter() {
+    
     const [dataCharacter, setState] = useState([] as any[])
     const [dataSeries, setSeries] = useState([] as any[])
-    const [cookies, setCookie] = useCookies([] as any[]);
-
+    const [name, setName] = useState([] as any[]);
+    const [description, setDesc] = useState([] as any[]);
+    
     const router = useRouter()
     const slug = router.query.slug
 
@@ -51,19 +52,29 @@ function editCharacter() {
         promisesSeries()
     }, [])
    
-    function handleSubmit(newName: any) {
-        setCookie('name', newName)
+    function handleChangeName(event: any) {
+        setName(event.target.value);
+    }
+
+    function handleChangeDesc(event: any) {
+        setDesc(event.target.value);
+    }
+
+    function handleSubmit(event: any) {
+        event.preventDefault();        
+        console.log('name:', name);
+        console.log('description:', description);
     }
 
     console.log("Data:", dataCharacter)
     console.log("Series:", dataSeries)
-
+           
     return (
         
             <div className={styles.container}>
 
                 <Head />     
-
+                
                 <main className={styles.main}>
                     <ul>
                         <h1 className={styles.title}>To Edit</h1>
@@ -78,7 +89,7 @@ function editCharacter() {
                                     alt={list.name}
                                     /> 
                                     
-                                    <form name={cookies.name} onSubmit={handleSubmit}>
+                                    <form onSubmit={handleSubmit}>
                                         <label>Name</label>
                                         <input 
                                             className={styles.inputText} 
@@ -86,6 +97,7 @@ function editCharacter() {
                                             name={'nameCharacter'}
                                             defaultValue={list.name}
                                             placeholder='Type it character Name...'
+                                            onChange={handleChangeName}
                                         />
 
                                         <label>Decription</label>
@@ -95,17 +107,16 @@ function editCharacter() {
                                             rows={8}
                                             defaultValue={list.description}
                                             placeholder='Type it character description...'
+                                            onChange={handleChangeDesc}
                                         />
                                                                                
                                                             
-                                    <Link href={`/`}>
                                         <button 
                                             className={styles.buttonSubmit}
-                                            type='submit'
+                                            type={'submit'}
                                         >
                                             Submit
                                         </button>
-                                    </Link>
                                     </form> 
                                 </div>  
                                 <Link href={`/characters/${list.id}`}><button className={styles.button}>Voltar</button></Link>        
